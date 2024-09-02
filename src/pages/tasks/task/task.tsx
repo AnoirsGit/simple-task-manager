@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Task() {
+function TaskPage() {
   return (
     <div className="">
         task working
@@ -8,4 +8,4 @@ function Task() {
   );
 }
 
-export default Task;
+export default TaskPage;

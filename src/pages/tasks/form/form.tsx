@@ -1,6 +1,6 @@
 import React from 'react';
 
-function TaskForm() {
+function TaskFormPage() {
   return (
     <div className="">
         form working
@@ -8,4 +8,4 @@ function TaskForm() {
   );
 }
 
-export default TaskForm;
+export default TaskFormPage;

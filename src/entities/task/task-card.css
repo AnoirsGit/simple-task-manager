@@ -1,0 +1,12 @@
+.task-card.kanban-view{
+    @apply px-4 py-2 mb-3 rounded-lg border border-slate-600;
+    @apply flex flex-col gap-1
+}
+
+.task-card-header.kanban-view{
+    @apply flex justify-between
+}
+
+.task-card-header.kanban-view h3{
+    @apply font-semibold text-lg
+}
