@@ -1,0 +1,17 @@
+
+.flex-center {
+    @apply flex justify-center items-center
+  }
+  
+  .abs-center {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+  
+  .abs-center-x {
+    @apply absolute left-1/2 -translate-x-1/2
+  }
+  
+  .abs-center-y {
+    @apply absolute top-1/2 -translate-y-1/2
+  }
+  
