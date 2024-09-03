@@ -1,9 +1,9 @@
 import { Icon } from "@iconify/react";
-import React from "react";
-import { ITask } from "./task.model"; // Import the ITask interface
-import "./task-card.css";
+import { ITask } from "../task.model"; // Import the ITask interface
+import "./index.css";
 import { Link } from "react-router-dom";
-import { useTaskContext } from "../../app/providers/task-provider";
+import { useTaskContext } from "../../../app/providers/task-provider";
+import { useEffect, useState } from "react";
 
 interface TaskCardProps {
   task: ITask;
@@ -12,6 +12,7 @@ interface TaskCardProps {
 
 function TaskCard({ task, tasksView }: TaskCardProps) {
   const { deleteTask } = useTaskContext();
+   
   return (
     <>
       {tasksView === "kanban" ? (
@@ -22,9 +23,7 @@ function TaskCard({ task, tasksView }: TaskCardProps) {
           </Link>
             <div className="flex gap-2">
               <Icon
-                onClick={() => {
-                  console.log('sdf')
-                  deleteTask(task.id)}}
+                onClick={() => deleteTask(task.id)}
                 icon="material-symbols:delete-outline"
               />
             </div>

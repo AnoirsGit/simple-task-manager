@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { useTaskContext } from "../../../../app/providers/task-provider";
 import { ITask } from "../../../../entities/task/task.model";
 import { useForm, Controller } from "react-hook-form";
@@ -8,25 +13,21 @@ import ModalContent from "../../../../shared/ui/modal/layout/modal-content-wrapp
 import ModalFooter from "../../../../shared/ui/modal/layout/modal-footer-wrapper";
 import "./index.css";
 import { STATUSES_MOCKS } from "../../../../shared/mocks/statuses-mocks";
+import { Icon } from "@iconify/react";
 
 const TaskFormPage = () => {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
   const [task, setTask] = useState<ITask | undefined>();
   const [error, setError] = useState<{ [key: string]: string }>({});
   const { getTaskById, updateTask, addTask } = useTaskContext();
   const navigate = useNavigate();
 
-
-  const {
-    control,
-    handleSubmit,
-    setValue,
-    formState: {},
-  } = useForm<ITask>({
+  const { control, handleSubmit, setValue } = useForm<ITask>({
     defaultValues: {
-      title: "",
-      description: "",
-      statusId: "",
+      title: searchParams.get("title") || "",
+      description: searchParams.get("description") || "",
+      statusId: searchParams.get("statusId") || "",
     },
   });
 
@@ -62,23 +63,38 @@ const TaskFormPage = () => {
       setError(validationErrors);
       return;
     }
-    if (id) {
-      updateTask({ ...data, id });
-    } else {
-      addTask({ ...data, id: new Date().toISOString() });
-    }
-    navigate('/tasks');
+  
+    const parentId = searchParams.get("parentId") || null;
+  
+    if (id) updateTask({ ...data, id, parentId: parentId || data.parentId });
+    else addTask({ ...data, id: new Date().toISOString(), parentId });
+  
+    navigate("/tasks");
   };
+  
 
   const handleClose = () => navigate(-1);
 
   return (
     <>
       <ModalHeader>
-        <h2>{id ? "Edit Task" : "Create New Task"}</h2>
-        <button type="button" onClick={handleClose}>
-          X
-        </button>
+        <h2 className="text-lg font-semibold">
+          {id ? "Edit Task" : "Create New Task"}
+        </h2>
+        <div className="flex gap-6 ">
+          {searchParams.get("parentId") && (
+            <Link
+              to={`/tasks/${searchParams.get("parentId")}`}
+              className="flex gap-1"
+            >
+              <div className="">parent task Id </div>
+              <Icon icon="basil:forward-solid" className="text-2xl" />
+            </Link>
+          )}
+          <button type="button" onClick={handleClose}>
+            X
+          </button>
+        </div>
       </ModalHeader>
       <ModalContent>
         <form onSubmit={handleSubmit(onSubmit)} className="text-slate-700">
@@ -91,9 +107,7 @@ const TaskFormPage = () => {
               control={control}
               render={({ field }) => <input {...field} />}
             />
-            {error.title && (
-              <p className="text-red-500">{error.title}</p>
-            )}
+            {error.title && <p className="text-red-500">{error.title}</p>}
           </div>
           <div className="flex flex-col">
             <label className="text-white" htmlFor="description">
@@ -134,9 +148,7 @@ const TaskFormPage = () => {
                 </select>
               )}
             />
-            {error.statusId && (
-              <p className="text-red-500">{error.statusId}</p>
-            )}
+            {error.statusId && <p className="text-red-500">{error.statusId}</p>}
           </div>
           <ModalFooter>
             <button

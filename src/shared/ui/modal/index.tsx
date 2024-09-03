@@ -20,7 +20,6 @@ const Modal = ({
           className="modal-content"
           onClick={(e) => e.stopPropagation()}
         >
-          sdf
           {children}
         </div>
       </div>

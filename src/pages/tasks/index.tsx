@@ -62,7 +62,7 @@ function TasksPage() {
               status={status}
               tasksView={tasksView}
             >
-              {groupedTasks[status.id]?.map((task) => (
+              {groupedTasks[status.id]?.filter(task => !task.parentId ).map((task) => (
                 <TaskCard
                   key={task.id}
                   tasksView={tasksView}
