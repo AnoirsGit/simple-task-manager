@@ -15,6 +15,15 @@
 }
 
 .page-layout-content {
-    @apply w-full h-full mb-4 px-6 lg:mx-auto lg:w-240 xl:w-320 2xl:w-360 ;
-  
+  @apply w-full h-full mb-4 px-6 lg:mx-auto lg:w-240 xl:w-320 2xl:w-360;
+}
+
+.modal-overlay {
+  z-index: 99997;
+  @apply fixed top-0 bg-black/50 w-screen h-screen;
+}
+
+.modal-content {
+  z-index: 99999;
+  @apply abs-center bg-dark p-4 rounded-xl border border-slate-700 w-2/5 min-h-60 flex flex-col justify-between;
 }

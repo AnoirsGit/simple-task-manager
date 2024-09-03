@@ -27,6 +27,27 @@ export const TASKS_MOCKS: ITask[] = [
         parentId: null,
         title: "Task 4",
         description: "Description for Task 4",
+        statusId: "status2"
+    },
+    {
+        id: "5",
+        parentId: null,
+        title: "Task 5",
+        description: "Description for Task 2",
+        statusId: "status1"
+    },
+    {
+        id: "6",
+        parentId: null,
+        title: "Task 6",
+        description: "Description for Task 3",
+        statusId: "status2"
+    },
+    {
+        id: "7",
+        parentId: null,
+        title: "Task 7",
+        description: "Description for Task 4",
         statusId: "status4"
     }
 ]

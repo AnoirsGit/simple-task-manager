@@ -8,15 +8,19 @@ import { ConfigProvider } from "./providers/config-provider";
 
 function App() {
   return (
-    <div className="App">
-      <ConfigProvider>
-        <TasksProvider>
-          <Layout>
-            <Router />
-          </Layout>
-        </TasksProvider>
-      </ConfigProvider>
-    </div>
+    <>
+      <div id="modal-root"></div>
+
+      <div className="App">
+        <ConfigProvider>
+          <TasksProvider>
+            <Layout>
+              <Router />
+            </Layout>
+          </TasksProvider>
+        </ConfigProvider>
+      </div>
+    </>
   );
 }
 

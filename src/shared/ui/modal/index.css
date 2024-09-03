@@ -1,0 +1,11 @@
+.modal-header{
+    @apply flex justify-between items-center gap-4 pb-3
+}
+
+.modal-footer{
+    @apply flex justify-end items-center gap-4 py-3 
+}
+
+.modal-internal-content {
+    @apply flex-grow
+}

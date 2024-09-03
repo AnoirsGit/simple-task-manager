@@ -1,12 +1,30 @@
 .task-card.kanban-view{
-    @apply px-4 py-2 mb-3 rounded-lg border border-slate-600;
+    @apply px-4 py-2 mb-3 rounded-lg border border-slate-800 bg-dark;
     @apply flex flex-col gap-1
 }
 
-.task-card-header.kanban-view{
+.task-card.kanban-view .task-card-header{
     @apply flex justify-between
 }
 
-.task-card-header.kanban-view h3{
+.task-card.kanban-view .task-card-header h3{
     @apply font-semibold text-lg
+}
+.task-card.list-view {
+    @apply px-4 py-2 rounded-lg border border-slate-600 bg-dark;
+    @apply grid grid-cols-[20%,60%,20%] items-center; /* Create a grid layout */
+}
+
+.task-card.list-view .task-card-header {
+    @apply flex justify-between;
+    @apply col-span-2; /* Span across the first two columns (20% + 60%) */
+}
+
+.task-status.list-view {
+    @apply text-right; /* Align status to the right in the third column */
+    @apply col-span-1; /* Occupy the third column */
+}
+
+.task-card.list-view .task-card-header h3 {
+    @apply font-semibold text-lg;
 }

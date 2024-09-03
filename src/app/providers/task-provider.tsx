@@ -6,6 +6,7 @@ interface TasksContextType {
   tasks: ITask[];
   addTask: (task: ITask) => void;
   updateTask: (task: ITask) => void;
+  getTaskById: (id: string | undefined) => ITask | undefined;
   deleteTask: (id: string) => void;
   setMocks: () => void;
 }
@@ -21,6 +22,11 @@ const TasksProvider = ({ children }: { children: ReactNode }) => {
     setTasks((prevTasks) => [...prevTasks, task]);
   };
 
+  const getTaskById = (id: string | undefined) => {
+    if(!id) return 
+    return tasks.find(task => task.id === id);
+  }
+
   const updateTask = (updatedTask: ITask) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
@@ -34,7 +40,7 @@ const TasksProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <TasksContext.Provider value={{ tasks, addTask, updateTask, deleteTask, setMocks }}>
+    <TasksContext.Provider value={{ tasks, addTask, updateTask, deleteTask, setMocks, getTaskById }}>
       {children}
     </TasksContext.Provider>
   );

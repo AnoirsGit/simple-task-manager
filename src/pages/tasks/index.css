@@ -1,0 +1,7 @@
+.tasks-board.kanban{
+    @apply flex overflow-x-auto gap-2
+}
+
+.tasks-board.list{
+    @apply flex flex-col gap-4
+}

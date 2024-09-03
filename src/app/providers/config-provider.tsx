@@ -4,19 +4,20 @@ import defaultConfig from '../../shared/defaults/default-config.json';
 interface ConfigContextType {
     config: Record<string, any>;  
     setConfig: (key: string, value: any) => void;
-    getConfigByKey: (key: string) => void;
+    getConfigByKey: (key: string) => any;
 }
 
 const ConfigContext = createContext<ConfigContextType | undefined>(undefined);
 
 const ConfigProvider = ({ children }: { children: ReactNode }) => {
-    const [config, setConfigState] = useState<Record<string, any>>({});
+    const [config, setConfigState] = useState<Record<string, any>>(() => {
+        const storedConfig = localStorage.getItem('config');
+        return storedConfig ? JSON.parse(storedConfig) : defaultConfig;
+    });
 
     useEffect(() => {
         const storedConfig = localStorage.getItem('config');
-        if (storedConfig) {
-            setConfigState(JSON.parse(storedConfig));
-        } else {
+        if (!storedConfig) {
             localStorage.setItem('config', JSON.stringify(defaultConfig));
         }
     }, []);
@@ -29,9 +30,9 @@ const ConfigProvider = ({ children }: { children: ReactNode }) => {
         });
     };
 
-    const getConfigByKey = (key:string) => { 
+    const getConfigByKey = (key: string) => { 
         return config[key];
-    }
+    };
 
     return (
         <ConfigContext.Provider value={{ config, setConfig, getConfigByKey }}>
